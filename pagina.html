@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Siglo XXI — Panorama, inventos, impacto y retos</title>
+  <meta name="description" content="Resumen claro y visual del siglo XXI: línea del tiempo, inventos, casos de uso, impacto social y retos éticos. Incluye modo oscuro, accesibilidad y animaciones suaves." />
+  <meta name="theme-color" content="#0ea5e9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b1322" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Siglo XXI — Panorama, inventos, impacto y retos" />
+  <meta property="og:description" content="Línea del tiempo por décadas, inventos destacados, casos de uso y grandes retos del siglo XXI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_CO" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230ea5e9'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-size='56' fill='white' font-family='system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif'%3E21%3C/text%3E%3C/svg%3E" />
+  <style>
+    /* ====== Reset y sistema de diseño ====== */
+    :root{
+      /* Paleta Tropical Neon */
+      --bg: #0a0a0f;
+      --surface: #0f1226;
+      --text: #eaf2ff;
+      --muted: #a8b3cf;
+      --line: #22263d;
+      --brand: #ff6b6b;       /* coral */
+      --brand-2:#7c5cff;      /* violeta eléctrico */
+      --accent:#22d3ee;       /* cian vivo */
+      --accent-2:#f59e0b;     /* ámbar */
+      --ok: #34d399;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --container: clamp(280px, 90vw, 1200px);
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        /* Mantén misma paleta en dark, mejora contraste */
+        --bg: #06070d;
+        --surface: #0b0e1d;
+        --text: #eef2ff;
+        --muted: #b8c0dd;
+        --line: #1a1f33;
+        --shadow: 0 12px 36px rgba(0,0,0,.6);
+      }
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"; color:var(--text); background:
+      radial-gradient(1200px 800px at 0% 0%, rgba(124,92,255,.25), transparent 55%),
+      radial-gradient(1000px 700px at 100% 0%, rgba(34,211,238,.2), transparent 55%),
+      radial-gradient(1000px 700px at 100% 100%, rgba(245,158,11,.18), transparent 55%),
+      #090b14;
+    }
+    img,svg{max-width:100%; height:auto}
+    a{color:var(--brand); text-decoration: none}
+    a:focus-visible, button:focus-visible{outline: 3px solid var(--brand); outline-offset:3px; border-radius:8px}
+    .container{width:var(--container); margin-inline:auto; padding-inline: 20px}
+    .muted{color:var(--muted)}
+    .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding: clamp(16px, 2.5vw, 28px); box-shadow: var(--shadow)}
+    .small{font-size:.95rem}
+    main.container > section + section {
+    margin-top: clamp(24px, 4vw, 40px);
+    }
+
+    /* ====== Header pegajoso ====== */
+    .site-header{position:sticky; top:0; z-index:50; background: color-mix(in srgb, var(--surface) 76%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line)}
+    .header-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:12px}
+    .site-title{font-size: clamp(20px, 2.4vw, 28px); margin:0}
+    .main-nav{display:flex; flex-wrap:wrap; align-items:center; gap:10px}
+    .main-nav a{padding:8px 12px; border-radius:10px; color:var(--text)}
+    .main-nav a.active{background: color-mix(in srgb, var(--brand) 10%, transparent)}
+
+    /* ====== Botones ====== */
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border:1px solid var(--line); background:var(--surface); color:var(--text); padding:.7rem 1rem; border-radius:12px; font-weight:600; transition: transform .1s ease, background .2s ease, border-color .2s ease}
+    .btn:hover{transform: translateY(-1px)}
+    .btn.cta{background: linear-gradient(135deg, var(--brand), var(--brand-2)); color:#fff; border-color: transparent; box-shadow:0 10px 30px rgba(124,92,255,.25)}
+    .btn.secondary{background:transparent}
+    .btn.small{padding:.5rem .75rem; font-weight:600}
+
+    /* ====== Hero ====== */
+    .hero{display:grid; grid-template-columns:1.2fr .8fr; gap: clamp(16px, 3vw, 40px); align-items:center; padding-block: clamp(24px, 6vw, 72px)}
+    .hero .hero-content h2{font-size: clamp(28px, 4vw, 44px); line-height:1.1; margin:0 0 10px}
+    .hero .cta-group{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+    .hero-illustration{place-self:center; filter: drop-shadow(0 10px 26px rgba(2,6,23,.15))}
+
+    /* ====== Títulos de sección ====== */
+    .section-title{display:flex; align-items:center; gap:.6rem; margin:0 0 10px; font-size: clamp(18px, 2vw, 22px);
+      background: linear-gradient(90deg, var(--brand), var(--accent), var(--brand-2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .section-title svg{width:22px; height:22px; fill: currentColor}
+
+    /* ====== Línea del tiempo ====== */
+    .timeline{display:grid; gap:18px}
+    .timeline__rail{position:relative; overflow:auto hidden; padding-bottom: 8px}
+    .timeline__items{display:grid; grid-auto-flow: column; grid-auto-columns: minmax(240px, 1fr); gap:16px}
+    .timeline__card{background: var(--surface); border:1px solid var(--line); border-radius: var(--radius-sm); padding:16px; box-shadow: var(--shadow)}
+    .timeline__card h4{margin:0 0 6px}
+    .timeline__progress{position:relative; height:4px; background:var(--line); border-radius:99px}
+    .timeline__bar{position:absolute; inset:0 auto 0 0; width:0%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); border-radius:inherit}
+
+    /* ====== Galería ====== */
+    .gallery{display:grid; grid-template-columns: repeat( auto-fit, minmax(160px, 1fr)); gap:10px}
+    .gallery figure{margin:0; position:relative}
+    .gallery img{display:block; width:100%; height:160px; object-fit:cover; border-radius:12px; border:1px solid var(--line)}
+    .gallery figcaption{position:absolute; inset:auto 8px 8px 8px; background: color-mix(in srgb, var(--surface) 80%, transparent); border:1px solid var(--line); border-radius:10px; padding:6px 8px; font-size:.8rem}
+
+    /* ====== Grid de tarjetas ====== */
+    .grid{display:grid; gap: clamp(12px, 2vw, 18px)}
+    @media (width>900px){
+      .grid.cols-2{grid-template-columns: 1fr 1fr}
+      .grid.cols-3{grid-template-columns: repeat(3,1fr)}
+    }
+
+    /* ====== Footer ====== */
+    .site-footer{margin-top: 32px; padding-block: 24px; border-top:1px solid var(--line); background: color-mix(in srgb, var(--surface) 92%, transparent)}
+
+    /* ====== Utilidades ====== */
+    .stack{display:grid; gap:12px}
+    .badge{display:inline-flex; align-items:center; gap:.5ch; background: color-mix(in srgb, var(--brand) 14%, transparent); color: var(--text); border:1px solid var(--line); border-radius:999px; padding:4px 10px; font-size:.8rem}
+    .kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.9em; border:1px solid var(--line); background: color-mix(in srgb, var(--surface) 70%, transparent); border-radius:8px; padding:2px 6px}
+    .prose ul{margin:0; padding-left: 1.1rem}
+    .prose li{margin:.35rem 0}
+
+    /* ====== Mobile ====== */
+    @media (width<860px){
+      .hero{grid-template-columns:1fr}
+      .main-nav{overflow:auto hidden; padding-bottom:6px}
+    }
+
+    /* ====== Animaciones de aparición ====== */
+    [data-animate]{opacity:0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease}
+    [data-animate].in{opacity:1; transform:none}
+
+    /* ====== Botón flontante y volver arriba ====== */
+    .fab, .to-top{position:fixed; right:16px; z-index:60; border-radius:999px; box-shadow: var(--shadow)}
+    .fab{bottom:16px; padding:12px; background:linear-gradient(135deg, #25D366, #128C7E); border:0}
+    .fab svg{display:block; width:26px; height:26px}
+    .to-top{bottom:86px; display:none; padding:10px 12px; background: var(--surface); border:1px solid var(--line)}
+    .to-top.show{display:inline-flex}
+
+    /* ====== Impresión ====== */
+    @media print{
+      .site-header, .fab, .to-top{display:none}
+      .card{box-shadow:none}
+      a[href^="http"]::after{content:" (" attr(href) ")"; font-size:.9em; color:var(--muted)}
+    }
+      /* ====== Paleta creativa (Aurora Circuit) ====== */
+    :root{
+      --brand: #4f46e5;       /* Indigo-600 */
+      --brand-2:#06b6d4;      /* Cyan-500 */
+      --accent:#f43f5e;       /* Rose-500 */
+      --glow: color-mix(in srgb, var(--brand) 40%, var(--brand-2) 60%);
+    }
+      /* Inventos grid y tarjetas visuales */
+    .inventos-grid{display:grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap:16px}
+    .card--invento{padding:0; overflow:hidden; border:1px solid var(--line); background:linear-gradient(180deg, color-mix(in srgb, var(--brand-2) 12%, var(--surface)), var(--surface));}
+    .card--invento img{width:100%; height:150px; object-fit:cover; display:block}
+    .card--invento figcaption{padding:14px}
+    .card--invento h4{margin:0 0 6px}
+
+    /* Glow sutil en hero */
+    .hero{position:relative}
+    .hero::after{content:""; position:absolute; inset:-20px; pointer-events:none; border-radius:24px; background: radial-gradient(600px 240px at 20% 20%, color-mix(in srgb, var(--brand) 30%, transparent), transparent 70%)}
+  </style>
+</head>
+<body>
+  <a class="kbd" href="#intro" style="position:absolute;left:-9999px" id="skip">Saltar al contenido</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <h1 class="site-title" aria-label="Siglo 21, página educativa">Siglo XXI</h1>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#intro">Inicio</a>
+        <a href="#linea">Línea del tiempo</a>
+        <a href="#inventos">Inventos</a>
+        <a href="#usos">Usos</a>
+        <a href="#ingenieria">Ingeniería</a>
+        <a href="#impacto">Impacto</a>
+        <a href="#retos">Retos</a>
+        <a href="#referencias">Referencias</a>
+        <button id="themeToggle" class="btn small" type="button" aria-pressed="false" aria-label="Cambiar tema">Modo oscuro</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="content" tabindex="-1">
+    <!-- ====== HERO ====== -->
+    <section id="intro" class="hero card" data-animate>
+      <div class="hero-content">
+        <h2>Un vistazo al siglo XXI</h2>
+        <p>El siglo XXI se caracteriza por la aceleración tecnológica, la interconexión global y la urgencia climática. Este recurso resume lo esencial: por qué importa, los inventos clave, sus usos y los desafíos que seguimos afrontando.</p>
+        <p class="muted">Contenido educativo y resumido para estudiantes y público general.</p>
+      </div>
+      <div class="hero-illustration" aria-hidden="true">
+        <!-- Ilustración SVG ligera -->
+        <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración siglo 21" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.9" />
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="800" height="600" rx="20" fill="url(#g1)" opacity="0.06"/>
+          <g transform="translate(120,90) scale(0.9)">
+            <rect x="0" y="0" width="160" height="260" rx="18" fill="#fff" opacity="0.9"/>
+            <rect x="12" y="18" width="136" height="200" rx="8" fill="#0f1724" opacity="0.9"/>
+            <circle cx="80" cy="230" r="8" fill="#111827" />
+          </g>
+          <g transform="translate(360,60) scale(1)">
+            <ellipse cx="120" cy="160" rx="120" ry="60" fill="#fff" opacity="0.12"/>
+            <path d="M40 160 C80 110,160 110,200 160 C240 210,320 210,360 160" stroke="#fff" stroke-width="2" fill="none" opacity="0.18"/>
+          </g>
+          <g transform="translate(520,220)">
+            <circle cx="0" cy="0" r="34" fill="#fff" opacity="0.14"/>
+            <circle cx="0" cy="0" r="18" fill="#fff" opacity="0.22"/>
+            <path d="M-6 -6 L6 6 M6 -6 L-6 6" stroke="#fff" stroke-width="2" opacity="0.9"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ====== LÍNEA DEL TIEMPO ====== -->
+    <section id="linea" class="card stack" data-animate>
+      <h3 class="section-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Línea del tiempo por décadas</h3>
+      <div class="timeline">
+        <div class="timeline__rail" id="rail" aria-label="Carrusel de décadas" tabindex="0">
+          <div class="timeline__items" id="timelineItems">
+            <article class="timeline__card" aria-label="2000s">
+              <h4>2000s</h4>
+              <p>Expansión de internet, smartphone moderno (iPhone 2007), redes sociales iniciales y primera ola de nube.</p>
+            </article>
+            <article class="timeline__card" aria-label="2010s">
+              <h4>2010s</h4>
+              <p>IA profunda gana impulso, adopción masiva de smartphones, streaming y e‑commerce a escala.</p>
+            </article>
+            <article class="timeline__card" aria-label="2020s">
+              <h4>2020s</h4>
+              <p>Pandemia acelera telemedicina y trabajo remoto; vacunas ARNm; renovables y modelos de IA avanzados.</p>
+            </article>
+          </div>
+        </div>
+        <div class="timeline__progress" aria-hidden="true"><div class="timeline__bar" id="timelineBar"></div></div>
+      </div>
+    </section>
+
+    <!-- ====== INVENTOS Y USOS ====== -->
+    <section aria-label="Inventos y usos">
+      <section id="inventos" class="card prose" data-animate>
+        <h3 class="section-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a2 2 0 00-2 2v7a2 2 0 004 0V4a2 2 0 00-2-2zM6 8a2 2 0 100 4 2 2 0 000-4zm12 0a2 2 0 100 4 2 2 0 000-4z"/></svg>Inventos y avances</h3>
+        <div class="inventos-grid">
+          <figure class="card card--invento">
+            <img src="imgs/Celular.jpeg" alt="Smartphone moderno" loading="lazy" />
+            <figcaption>
+              <h4>Smartphones</h4>
+              <p>Computación de bolsillo. Comunicación, cámaras, GPS y apps para banca, salud y logística.</p>
+            </figcaption>
+          </figure>
+          <figure class="card card--invento">
+            <img src="imgs/nube.png" alt="Centro de datos y nube" loading="lazy" />
+            <figcaption>
+              <h4>Nube e internet rápido</h4>
+              <p>Streaming, colaboración global y servicios SaaS a gran escala.</p>
+            </figcaption>
+          </figure>
+          <figure class="card card--invento">
+            <img src="imgs/IA.jpeg" alt="Representación de inteligencia artificial" loading="lazy" />
+            <figcaption>
+              <h4>Inteligencia artificial</h4>
+              <p>Visión, lenguaje y predicción con impacto transversal.</p>
+            </figcaption>
+          </figure>
+          <figure class="card card--invento">
+            <img src="imgs/vacuna.jpeg" alt="Vacuna ARNm" loading="lazy" />
+            <figcaption>
+              <h4>Vacunas ARNm</h4>
+              <p>Plataforma que aceleró la respuesta a COVID‑19 y abre terapias futuras.</p>
+            </figcaption>
+          </figure>
+          <figure class="card card--invento">
+            <img src="imgs/crip.png" alt="CRISPR edición genética" loading="lazy" />
+            <figcaption>
+              <h4>CRISPR</h4>
+              <p>Edición precisa de ADN para salud y agricultura.</p>
+            </figcaption>
+          </figure>
+          <figure class="card card--invento">
+            <img src="imgs/carro.jpg" alt="Vehículo eléctrico y baterías" loading="lazy" />
+            <figcaption>
+              <h4>Vehículos eléctricos</h4>
+              <p>Baterías más capaces y adopción masiva en transporte.</p>
+            </figcaption>
+          </figure>
+          <figure class="card card--invento">
+            <img src="imgs/energia.jpg" alt="Paneles solares y turbinas eólicas" loading="lazy" />
+            <figcaption>
+              <h4>Renovables</h4>
+              <p>Solar, eólica y almacenamiento para descarbonizar.</p>
+            </figcaption>
+          </figure>
+          <figure class="card card--invento">
+            <img src="imgs/Block.jpg" alt="Blockchain y contratos inteligentes" loading="lazy" />
+            <figcaption>
+              <h4>Blockchain</h4>
+              <p>Registros inmutables y nuevos modelos de confianza.</p>
+            </figcaption>
+          </figure>
+          <figure class="card card--invento">
+            <img src="imgs/3D.jpg" alt="Impresora 3D en acción" loading="lazy" />
+            <figcaption>
+              <h4>Impresión 3D</h4>
+              <p>Prototipado rápido y fabricación personalizada.</p>
+            </figcaption>
+          </figure>
+          <figure class="card card--invento">
+            <img src="imgs/cuantica.jpg" alt="Procesador cuántico" loading="lazy" />
+            <figcaption>
+              <h4>Computación cuántica</h4>
+              <p>Exploración con potencial en ciertas optimizaciones.</p>
+            </figcaption>
+          </figure>
+          <figure class="card card--invento">
+            <img src="imgs/redes.png" alt="Redes sociales" loading="lazy" />
+            <figcaption>
+              <h4>Redes sociales</h4>
+              <p>Nuevos flujos de información, creación y negocio.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+    </section>
+    <section id="usos" class="card prose" data-animate>
+        <h3 class="section-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v4H3zM3 9h18v12H3z"/></svg>Casos de uso</h3>
+        <ul>
+          <li><strong>Salud:</strong> diagnósticos asistidos por IA, telemedicina y terapias génicas.</li>
+          <li><strong>Educación:</strong> MOOC, clases híbridas y personalización por datos.</li>
+          <li><strong>Transporte:</strong> navegación, vehículos eléctricos y logística optimizada.</li>
+          <li><strong>Economía y trabajo:</strong> e‑commerce, pagos digitales y trabajo remoto.</li>
+          <li><strong>Medio ambiente:</strong> monitoreo climático y redes de sensores.</li>
+          <li><strong>Arte y entretenimiento:</strong> creación asistida por IA y streaming global.</li>
+        </ul>
+      </section>
+
+    <!-- ====== INGENIERÍA ====== -->
+    <section id="ingenieria" class="card prose" data-animate>
+      <h3 class="section-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>Importancia del siglo XXI en la ingeniería</h3>
+      <p>La ingeniería del siglo XXI es clave para alcanzar objetivos sociales y ambientales. La convergencia de <strong>IA</strong>, <strong>IoT</strong>, <strong>robótica</strong>, <strong>nube</strong> y <strong>energía limpia</strong> habilita soluciones escalables para salud, ciudades, industria y clima. La UNESCO subraya la contribución directa de la ingeniería a los <abbr title="Objetivos de Desarrollo Sostenible">ODS</abbr>; el Foro Económico Mundial describe la <em>Industria 4.0</em> como un cambio de fondo en cómo se diseña, fabrica y opera; y la IEA muestra una electrificación acelerada con renovables que exige nuevas redes, almacenamiento y electrónica de potencia.</p>
+      <div class="grid cols-3">
+        <div class="card" style="border-style:dashed">
+          <h4>Arquitecturas digitales</h4>
+          <p>De <strong>edge</strong> a <strong>cloud</strong>: IA en tiempo real, 5G/6G y gemelos digitales para mantenimiento predictivo.</p>
+        </div>
+        <div class="card" style="border-style:dashed">
+          <h4>Energía y potencia</h4>
+          <p>Integración de solar/eólica, <strong>baterías</strong>, convertidores de alto rendimiento y control inteligente de redes.</p>
+        </div>
+        <div class="card" style="border-style:dashed">
+          <h4>Bioingeniería</h4>
+          <p>Plataformas <strong>ARNm</strong>, <strong>CRISPR</strong> y fabricación aditiva médica aceleran diagnóstico y terapias.</p>
+        </div>
+      </div>
+      <p class="muted">Consecuencias prácticas: estándares de ciberseguridad por defecto, diseño sostenible, ingeniería basada en datos y competencias interdisciplinares.</p>
+    </section>
+
+    <!-- ====== IMPACTO Y RETOS ====== -->
+    <section class="grid cols-2" aria-label="Impacto y retos">
+      <section id="impacto" class="card prose" data-animate>
+        <h3 class="section-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v18H3z"/></svg>Impacto social y económico</h3>
+        <ul>
+          <li>Nuevas industrias (software, datos, energías limpias) y automatización de roles tradicionales.</li>
+          <li>Conectividad global que acelera innovación y también la desinformación.</li>
+          <li>Mejoras sanitarias y mayor esperanza de vida, con desigualdades persistentes.</li>
+        </ul>
+      </section>
+
+      <section id="retos" class="card prose" data-animate>
+        <h3 class="section-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>Retos, ética y sostenibilidad</h3>
+        <ul>
+          <li><strong>Privacidad y datos:</strong> gobernanza del dato personal.</li>
+          <li><strong>Ética en IA:</strong> sesgos, explicabilidad y responsabilidad.</li>
+          <li><strong>Brecha digital:</strong> acceso, infraestructura y habilidades.</li>
+          <li><strong>Clima:</strong> mitigación y adaptación con tecnologías limpias.</li>
+          <li><strong>Ciberseguridad:</strong> resiliencia, regulación y cooperación.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ====== CONCLUSIÓN ====== -->
+    <section id="conclusion" class="card prose" data-animate>
+      <h3 class="section-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>Conclusión</h3>
+      <p>El siglo XXI condensa oportunidades y responsabilidades. Las tecnologías mejoran vidas si van acompañadas de políticas públicas, educación y acceso equitativo. Comprender estos cambios permite participar mejor en decisiones que moldean el futuro.</p>
+    </section>
+
+    <!-- ====== REFERENCIAS ====== -->
+    <section id="referencias" class="card small prose" data-animate>
+      <h3 class="section-title"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>Referencias y recursos</h3>
+      <details open>
+        <summary><strong>Lista verificada</strong></summary>
+        <ul>
+          <li><a href="https://www.unesco.org/en/basic-sciences-engineering/report" target="_blank" rel="noopener">UNESCO — Engineering for Sustainable Development (2021)</a></li>
+          <li><a href="https://www.iea.org/reports/renewables-2024" target="_blank" rel="noopener">IEA — Renewables 2024</a></li>
+          <li><a href="https://www.weforum.org/focus/fourth-industrial-revolution/" target="_blank" rel="noopener">WEF — Cuarta Revolución Industrial</a></li>
+          <li><a href="https://www.nobelprize.org/prizes/chemistry/2020/popular-information/" target="_blank" rel="noopener">Nobel 2020 — CRISPR/Cas9</a></li>
+          <li><a href="https://www.who.int/news/item/29-06-2020-covidtimeline" target="_blank" rel="noopener">OMS — Cronología COVID‑19</a></li>
+        </ul>
+      </details>
+      <p class="muted">Recurso informativo. Verifica fechas y versiones al citar.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <small>© Siglo XXI · Página educativa. Construida con accesibilidad, rendimiento y modo oscuro.</small>
+    </div>
+  </footer>
+
+  <script>
+    // ====== Tema: respeta preferencia del sistema y guarda elección ======
+    const toggleBtn = document.getElementById('themeToggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const applyTheme = (mode) => {
+      document.documentElement.dataset.theme = mode; // Hook por si se requiere
+      toggleBtn.setAttribute('aria-pressed', mode === 'dark');
+      toggleBtn.textContent = mode === 'dark' ? 'Modo claro' : 'Modo oscuro';
+      // Sin variables adicionales: usamos prefers-color-scheme y estilos neutros
+    };
+    const saved = localStorage.getItem('theme');
+    const initial = saved || (prefersDark.matches ? 'dark' : 'light');
+    applyTheme(initial);
+    toggleBtn?.addEventListener('click', () => {
+      const next = (toggleBtn.getAttribute('aria-pressed') === 'true') ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    });
+    prefersDark.addEventListener('change', (e)=>{
+      if(!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light');
+    });
+
+    // ====== Scrollspy simple: resalta enlace activo ======
+    const navLinks = Array.from(document.querySelectorAll('.main-nav a[href^="#"]'));
+    const sections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const spy = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const idx = sections.indexOf(entry.target);
+        if(idx>-1){
+          const link = navLinks[idx];
+          if(entry.isIntersecting){ link.classList.add('active'); }
+          else{ link.classList.remove('active'); }
+        }
+      })
+    }, {rootMargin: '-40% 0px -55% 0px', threshold: 0});
+    sections.forEach(s=> spy.observe(s));
+
+    // ====== Aparición suave de secciones ======
+    const fx = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); fx.unobserve(e.target); } });
+    }, {threshold:.15});
+    document.querySelectorAll('[data-animate]').forEach(el=> fx.observe(el));
+
+    // ====== Progreso horizontal de la línea del tiempo ======
+    const rail = document.getElementById('rail');
+    const bar = document.getElementById('timelineBar');
+    function updateBar(){
+      const max = rail.scrollWidth - rail.clientWidth;
+      const pct = max>0 ? Math.min(1, rail.scrollLeft / max) : 0;
+      bar.style.width = (pct*100).toFixed(1) + '%';
+    }
+    rail?.addEventListener('scroll', updateBar, {passive:true});
+    window.addEventListener('resize', updateBar);
+    updateBar();
+
+    // ====== Modal ligero para la galería ======
+    const gallery = document.getElementById('gallery');
+    const modal = document.createElement('dialog');
+    modal.setAttribute('aria-label','Visor de imagen');
+    modal.innerHTML = '<button id="closeModal" class="btn small" style="position:absolute;right:12px;top:12px">Cerrar</button><img alt="" style="max-width:min(92vw,1000px); max-height:80vh; border-radius:12px; border:1px solid var(--line)" />';
+    document.body.appendChild(modal);
+    gallery?.addEventListener('click', (e)=>{
+      const img = e.target.closest('img');
+      if(!img) return;
+      const big = modal.querySelector('img');
+      big.src = img.src; big.alt = img.alt; 
+      if(typeof modal.showModal === 'function') modal.showModal();
+      else modal.setAttribute('open','');
+    });
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.close?.(); });
+    modal.querySelector('#closeModal')?.addEventListener('click', ()=> modal.close?.());
+
+    // ====== Volver arriba ======
+    const toTop = document.getElementById('toTop');
+    const topObs = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        toTop.classList.toggle('show', !entry.isIntersecting);
+      })
+    });
+    topObs.observe(document.querySelector('header'));
+    toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+    // ====== Atajos ======
+    document.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase()==='t'){ toggleBtn?.click(); }
+      if(e.key.toLowerCase()==='g' && e.altKey){ document.getElementById('galeria')?.scrollIntoView({behavior:'smooth'}); }
+    });
+  </script>
+
+  <!-- Datos estructurados mínimos -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Siglo XXI — Recurso educativo",
+    "inLanguage": "es",
+    "url": "",
+    "description": "Resumen del siglo XXI con línea del tiempo, inventos, casos de uso, impacto y retos."
+  }
+  </script>
+</body>
+</html>
