@@ -33,6 +33,19 @@
       --radius-sm: 12px;
       --container: clamp(280px, 90vw, 1200px);
     }
+    /* Tema claro por defecto */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8f9fc;
+        --surface: #ffffff;
+        --text: #0f1726;
+        --muted: #64748b;
+        --line: #e2e8f0;
+        --shadow: 0 4px 12px rgba(0,0,0,.08);
+      }
+    }
+    
+    /* Tema oscuro */
     @media (prefers-color-scheme: dark){
       :root{
         /* Mantén misma paleta en dark, mejora contraste */
@@ -43,6 +56,40 @@
         --line: #1a1f33;
         --shadow: 0 12px 36px rgba(0,0,0,.6);
       }
+    }
+    
+    /* Tema claro forzado por usuario */
+    html[data-theme="light"] {
+      --bg: #f8f9fc;
+      --surface: #ffffff;
+      --text: #0f1726;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --shadow: 0 4px 12px rgba(0,0,0,.08);
+    }
+    html[data-theme="light"] body {
+      background: 
+        radial-gradient(1200px 800px at 0% 0%, rgba(124,92,255,.08), transparent 55%),
+        radial-gradient(1000px 700px at 100% 0%, rgba(34,211,238,.06), transparent 55%),
+        radial-gradient(1000px 700px at 100% 100%, rgba(245,158,11,.05), transparent 55%),
+        #f8f9fc;
+    }
+    
+    /* Tema oscuro forzado por usuario */
+    html[data-theme="dark"] {
+      --bg: #06070d;
+      --surface: #0b0e1d;
+      --text: #eef2ff;
+      --muted: #b8c0dd;
+      --line: #1a1f33;
+      --shadow: 0 12px 36px rgba(0,0,0,.6);
+    }
+    html[data-theme="dark"] body {
+      background:
+        radial-gradient(1200px 800px at 0% 0%, rgba(124,92,255,.25), transparent 55%),
+        radial-gradient(1000px 700px at 100% 0%, rgba(34,211,238,.2), transparent 55%),
+        radial-gradient(1000px 700px at 100% 100%, rgba(245,158,11,.18), transparent 55%),
+        #090b14;
     }
     *,*::before,*::after{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -418,23 +465,38 @@
   <script>
     // ====== Tema: respeta preferencia del sistema y guarda elección ======
     const toggleBtn = document.getElementById('themeToggle');
+    const html = document.documentElement;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    
     const applyTheme = (mode) => {
-      document.documentElement.dataset.theme = mode; // Hook por si se requiere
+      html.setAttribute('data-theme', mode);
       toggleBtn.setAttribute('aria-pressed', mode === 'dark');
       toggleBtn.textContent = mode === 'dark' ? 'Modo claro' : 'Modo oscuro';
-      // Sin variables adicionales: usamos prefers-color-scheme y estilos neutros
     };
+    
+    // Inicializar tema
     const saved = localStorage.getItem('theme');
-    const initial = saved || (prefersDark.matches ? 'dark' : 'light');
-    applyTheme(initial);
+    if (saved) {
+      // Usuario ha elegido un tema específico
+      applyTheme(saved);
+    } else {
+      // Usar preferencia del sistema
+      applyTheme(prefersDark.matches ? 'dark' : 'light');
+    }
+    
+    // Botón para cambiar tema
     toggleBtn?.addEventListener('click', () => {
-      const next = (toggleBtn.getAttribute('aria-pressed') === 'true') ? 'light' : 'dark';
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
       localStorage.setItem('theme', next);
       applyTheme(next);
     });
+    
+    // Si cambia la preferencia del sistema y no hay tema guardado
     prefersDark.addEventListener('change', (e)=>{
-      if(!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light');
+      if(!localStorage.getItem('theme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
     });
 
     // ====== Scrollspy simple: resalta enlace activo ======
